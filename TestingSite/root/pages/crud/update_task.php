@@ -1,6 +1,11 @@
 <?php
 
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
+if ($_SERVER["REQUEST_METHOD"] == "POST" && $_POST['updateTaskStatus'] === 'true') {
+    error_log("RUN MEEEEEEEEEE");
+    updateRowStatus($_POST['id'], $_POST['status']);
+    return;
+    error_log("THIS CODE SHOULD NOT BE RAN");
+} else if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $taskTitle = $_POST['taskTitle'];
     $tag = $_POST['tag'];
     $status = $_POST['status'];
@@ -21,7 +26,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         end_date= :end_date 
         WHERE id= :id;";
 
-
         $stmt = $pdo->prepare($query);
 
         $stmt->bindParam("task_title", $taskTitle);
@@ -33,7 +37,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $stmt->bindParam("id", $id);
 
         $stmt->execute();
-        echo "Query executed successfully.";
 
         //manual close of statement and connection to db
         $stmt = null;
@@ -50,4 +53,34 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 } else {
     header("Location: ../forms/update_task_form.php");
+}
+
+
+function updateRowStatus($id, $status)
+{
+    error_log("id: " . $id . ", status: " . $status);
+
+    try {
+        require_once "../../scripts/dbh_inc.php";
+
+        $query = "UPDATE tasks_tbl SET status = :status WHERE id = :id;";
+
+        $stmt = $pdo->prepare($query);
+
+        $stmt->bindParam("status", $status);
+        $stmt->bindParam("id", $id);
+
+        $stmt->execute();
+
+        header("Location: ../../index.php");
+
+        $stmt = null;
+        $pdo = null;
+        die();
+    } catch (PDOException $e) {
+        echo "Query: " . $query;
+        echo "Parameters: ";
+        print_r($stmt->debugDumpParams());
+        die("Query failed: " . $e->getMessage());
+    }
 }
