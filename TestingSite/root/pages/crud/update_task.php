@@ -7,7 +7,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $priority = $_POST['priority'];
     $startDate = $_POST['startDate'];
     $endDate = $_POST['endDate'];
-    $taskId = $_POST['taskId'];
+    $id = $_GET['id'];
 
     try {
         require_once "../../scripts/dbh_inc.php";
@@ -19,7 +19,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         priority= :priority, 
         start_date= :start_date, 
         end_date= :end_date 
-        WHERE task_id= :task_id;";
+        WHERE id= :id;";
 
 
         $stmt = $pdo->prepare($query);
@@ -30,9 +30,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $stmt->bindParam("priority", $priority);
         $stmt->bindParam("start_date", $startDate);
         $stmt->bindParam("end_date", $endDate);
-        $stmt->bindParam("task_id", $taskId);
+        $stmt->bindParam("id", $id);
 
         $stmt->execute();
+        echo "Query executed successfully.";
 
         //manual close of statement and connection to db
         $stmt = null;
@@ -42,9 +43,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         header("Location: ../../index.php");
         die();
     } catch (PDOException $e) {
+        echo "Query: " . $query;
+        echo "Parameters: ";
+        print_r($stmt->debugDumpParams());
         die("Query failed: " . $e->getMessage());
     }
 } else {
     header("Location: ../forms/update_task_form.php");
 }
-
