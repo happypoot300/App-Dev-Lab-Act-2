@@ -9,7 +9,8 @@ try {
 
     $stmt = $pdo->prepare($query);
 
-    $stmt->execute(['id' => $id]);
+    $stmt->bindParam("id", $id);
+    $stmt->execute();
 
     $result = $stmt->fetch(PDO::FETCH_ASSOC);
 
@@ -36,7 +37,7 @@ try {
 <body>
     <div class="container">
         <div class="container__backbutton">
-            <h1>UPDATE TASK</h1>
+            <h1>EDIT TASK</h1>
             <a href="../../index.php"><button class="backbutton">
                     < </button></a>
         </div>
@@ -69,9 +70,10 @@ try {
                 <div class="form-group">
                     <label for="priority">Priority</label>
                     <select id="priority" name="priority">
-                        <option value="low" <?php echo $result["priority"] == "low" ? "selected" : "" ?>>Low</option>
-                        <option value="medium" <?php echo $result["priority"] == "medium" ? "selected" : "" ?>>Medium</option>
-                        <option value="high" <?php echo $result["priority"] == "high" ? "selected" : "" ?>>High</option>
+                        <?php var_dump($result); ?>
+                        <option value="low" <?php echo $result["priority"] === "low" ? "selected" : "" ?>>Low</option>
+                        <option value="medium" <?php echo $result["priority"] === "medium" ? "selected" : "" ?>>Medium</option>
+                        <option value="high" <?php echo $result["priority"] === "high" ? "selected" : "" ?>>High</option>
                     </select>
                 </div>
             </div>
@@ -86,7 +88,7 @@ try {
                     <input type="date" id="endDate" name="endDate" value="<?php echo $result["end_date"]; ?>" required>
                 </div>
             </div>
-            <button type="submit" class="btn-submit">UPDATE</button>
+            <button type="submit" class="btn-submit">SUBMIT</button>
         </form>
     </div>
 </body>
