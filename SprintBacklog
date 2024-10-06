@@ -29,12 +29,11 @@ User Story 3: As a user, i want to be able to Delete Tasks
 
 
 Sprint 4:
-User Story 4: As a user, i want to be able to Delete Tasks
-    -Design the Delete task form
-    -Develop Delete task form and add validations needed
-    -Connect the backend to Delete task form
+User Story 4: As a user, i want to be able to mark my tasks as done
+    -Design the list of all task to have a working checkbox
+    -When the User clicks on the checkbox that task gets a striketext
+    -Add other visual design to better diffirentiate each column
     -Refactor code for better readability 
-    -Test the Delete task form for any errors/bugs
-
+    -Test for any errors/bugs
 
 
