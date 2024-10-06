@@ -120,7 +120,7 @@ thead {
 }
 
 tbody tr:nth-child(even) {
-  background-color: #16163a; /* or any other color you prefer */
+  background-color: #16163a;
 }
 
 th {

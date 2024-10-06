@@ -8,6 +8,7 @@ try {
     $stmt = $pdo->prepare($query);
 
     $stmt->bindParam("id", $id);
+    
     $stmt->execute();
 
     //manual close of statement and connection to db
