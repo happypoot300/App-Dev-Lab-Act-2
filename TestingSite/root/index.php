@@ -26,9 +26,15 @@ try {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <!-- Fontawesome-->
+    <!-- Fontawesome -->
     <script src="https://kit.fontawesome.com/76890dc9bd.js" crossorigin="anonymous"></script>
 
+    <!-- JQuery -->
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"
+        integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo="
+        crossorigin="anonymous"></script>
+
+    <!-- CSS -->
     <link rel="stylesheet" href="styles/reset.css">
     <link rel="stylesheet" href="styles/index.css?v=<?php echo time(); ?>">
     <title>TaskM</title>
@@ -49,12 +55,13 @@ try {
         <section class="body__tableWrapper">
             <div class="body__container">
                 <p>All Tasks</p>
-                <a href="pages/forms/add_task_form.php"><button class="button__addtask">+ ADD TASK</button></a>
+                <button class="button__addtask">+ ADD TASK</button>
             </div>
 
             <table>
                 <thead>
                     <tr>
+                        <th></th>
                         <th>Tasks</th>
                         <th>Tag</th>
                         <th>Status</th>
@@ -70,15 +77,23 @@ try {
                 } else {
                     foreach ($result as $row) {
                         echo "<tr>";
-                        echo "<td><input type='checkbox'></td>";
-                        echo "<td>" . htmlspecialchars($row["task_title"]) . "</td>";
-                        echo "<td>" . htmlspecialchars($row["tag"]) . "</td>";
-                        echo "<td>" . htmlspecialchars($row["status"]) . "</td>";
-                        echo "<td>" . htmlspecialchars($row["start_date"]) . "</td>";
-                        echo "<td>" . htmlspecialchars($row["end_date"]) . "</td>";
-                        echo "<td>" . htmlspecialchars($row["priority"]) . "</td>";
+                        echo "<td class='td__text'><i class='fa-solid fa-check fa-lg check'></i></td>";
+                        echo "<td class='td__text'>" . htmlspecialchars($row["task_title"]) . "</td>";
+                        echo "<td class='td__text'>" . htmlspecialchars($row["tag"]) . "</td>";
+                        echo "<td class='td__text'>" . htmlspecialchars($row["status"]) . "</td>";
+                        echo "<td class='td__text'>" . htmlspecialchars($row["start_date"]) . "</td>";
+                        echo "<td class='td__text'>" . htmlspecialchars($row["end_date"]) . "</td>";
+                        echo "<td class='td__text'>" . htmlspecialchars($row["priority"]) . "</td>";
 
-                        echo "<td> <a href='pages/forms/update_task_form.php?id=" . $row["id"] . "'><i class='fa-solid fa-ellipsis-vertical fa-xl'></i></a></td>";
+                        echo "<td class='td__text'>
+                            <div class='dropdown'>
+                                <i class='fa-solid fa-ellipsis-vertical fa-xl' id='actions' data-id='" . $row['id'] . "'></i>
+                                <div class='dropdown-content'>
+                                    <a class='edit' data-id='" . $row['id'] . "'>Edit</a>
+                                    <a class='delete' data-id='" . $row['id'] . "'>Delete</a>
+                                </div>
+                            </div>
+                        </td>";
                         echo "</tr>";
                     }
                 }
@@ -91,3 +106,4 @@ try {
 </body>
 
 </html>
+<script src="scripts/index.js"></script>

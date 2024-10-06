@@ -125,14 +125,19 @@ th {
   vertical-align: middle;
 }
 
-td {
+.td__text {
   height: 45px;
   max-width: 150px;
   font-size: var(--standardText);
   color: var(--baby-powder);
   border-top: 1px solid var(--baby-powder);
   word-wrap: break-word;
+  white-space: nowrap;
   vertical-align: middle;
+}
+
+.td__text button {
+  margin-left: 10px;
 }
 
 .no-task-message {
@@ -143,17 +148,55 @@ td {
 .fa-ellipsis-vertical {
   color: var(--pumpkin);
   cursor: pointer;
-  margin: 0 10px 0 0;
+  margin-right: 10px;
 }
 
-input[type="checkbox"] {
-  width: 20px;
-  height: 20px;
-  border: 2px solid var(--pumpkin);
+.fa-check {
+  color: rgba(255, 115, 0, 0.164);
   cursor: pointer;
+  margin-left: 10px;
 }
 
-input[type="checkbox"]:hover {
-  border-color: var(--pumkin_hover);
-  background-color: rgba(255, 133, 51, 0.61);
+.fa-check.active {
+  color: var(--pumpkin);
 }
+
+.strikethrough {
+  text-decoration: line-through;
+}
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+  border-radius: 5px;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: var(--baby-powder);
+  min-width: 100px;
+  top: 35px;
+  left: -115px;
+  z-index: 1;
+  padding: 5px;
+  border-radius: 5px;
+}
+
+.dropdown-content a {
+  color: var(--oxford-blue);
+  font-size: var(--standardText);
+  padding: 12px 16px;
+  display: block;
+}
+
+.dropdown-content a:nth-child(2) {
+  border-top: 2px solid var(--oxford-blue);
+}
+
+.dropdown-content a:hover {
+  background-color: var(--pumkin_hover);
+}
+
+
+
