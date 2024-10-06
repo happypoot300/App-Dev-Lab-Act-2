@@ -4,8 +4,6 @@ try {
 
     $id = $_GET["id"];
 
-    //error_log("id: " . $id);
-
     $query = "SELECT * FROM tasks_tbl WHERE id = :id";
 
     $stmt = $pdo->prepare($query);
@@ -73,7 +71,7 @@ try {
                     <select id="priority" name="priority">
                         <option value="Low" <?php echo $result["priority"] === "Low" ? "selected" : "" ?>>Low</option>
                         <option value="Medium" <?php echo $result["priority"] === "Medium" ? "selected" : "" ?>>Medium</option>
-                        <option value="high" <?php echo $result["priority"] === "High" ? "selected" : "" ?>>High</option>
+                        <option value="High" <?php echo $result["priority"] === "High" ? "selected" : "" ?>>High</option>
                     </select>
                 </div>
             </div>
