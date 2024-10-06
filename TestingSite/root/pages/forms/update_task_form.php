@@ -2,8 +2,9 @@
 try {
     require_once "../../scripts/dbh_inc.php";
 
-    // Get the id of the task from the url
     $id = $_GET["id"];
+
+    //error_log("id: " . $id);
 
     $query = "SELECT * FROM tasks_tbl WHERE id = :id";
 
@@ -51,29 +52,28 @@ try {
                 <div class="form-group">
                     <label for="tag">Tag</label>
                     <select id="tag" name="tag">
-                        <option value="personal" <?php echo $result["tag"] == "personal" ? "selected" : "" ?>>Personal</option>
-                        <option value="urgent" <?php echo $result["tag"] == "urgent" ? "selected" : "" ?>>School</option>
-                        <option value="important" <?php echo $result["tag"] == "important" ? "selected" : "" ?>>Work</option>
+                        <option value="Personal" <?php echo $result["tag"] == "Personal" ? "selected" : "" ?>>Personal</option>
+                        <option value="School" <?php echo $result["tag"] == "School" ? "selected" : "" ?>>School</option>
+                        <option value="Work" <?php echo $result["tag"] == "Work" ? "selected" : "" ?>>Work</option>
                     </select>
                 </div>
 
                 <div class="form-group">
                     <label for="status">Status</label>
                     <select id="status" name="status">
-                        <option value="incomplete" <?php echo $result["status"] == "incomplete" ? "selected" : "" ?>>Active</option>
-                        <option value="complete" <?php echo $result["status"] == "complete" ? "selected" : "" ?>>Completed</option>
-                        <option value="complete" <?php echo $result["status"] == "complete" ? "selected" : "" ?>>In Progress</option>
-                        <option value="complete" <?php echo $result["status"] == "complete" ? "selected" : "" ?>>Pending</option>
+                        <option value="Active" <?php echo $result["status"] == "Active" ? "selected" : "" ?>>Active</option>
+                        <option value="Completed" <?php echo $result["status"] == "Completed" ? "selected" : "" ?>>Completed</option>
+                        <option value="In Progress" <?php echo $result["status"] == "In progress" ? "selected" : "" ?>>In Progress</option>
+                        <option value="Pending" <?php echo $result["status"] == "Pending" ? "selected" : "" ?>>Pending</option>
                     </select>
                 </div>
 
                 <div class="form-group">
                     <label for="priority">Priority</label>
                     <select id="priority" name="priority">
-                        <?php var_dump($result); ?>
-                        <option value="low" <?php echo $result["priority"] === "low" ? "selected" : "" ?>>Low</option>
-                        <option value="medium" <?php echo $result["priority"] === "medium" ? "selected" : "" ?>>Medium</option>
-                        <option value="high" <?php echo $result["priority"] === "high" ? "selected" : "" ?>>High</option>
+                        <option value="Low" <?php echo $result["priority"] === "Low" ? "selected" : "" ?>>Low</option>
+                        <option value="Medium" <?php echo $result["priority"] === "Medium" ? "selected" : "" ?>>Medium</option>
+                        <option value="high" <?php echo $result["priority"] === "High" ? "selected" : "" ?>>High</option>
                     </select>
                 </div>
             </div>
