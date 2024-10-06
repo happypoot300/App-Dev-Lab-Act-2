@@ -1,19 +1,22 @@
 <?php
-include 'db.php';
+try {
+    require_once "../../scripts/dbh_inc.php";
+    $id = $_GET['id'];
 
-$id = $_GET['id'];
+    $query = "DELETE FROM tasks_tbl WHERE id = :id";
 
-$sql = "DELETE FROM tasks WHERE id=?";
-$stmt = $conn->prepare($sql);
-$stmt->bind_param("i", $id);
+    $stmt = $pdo->prepare($query);
 
-if ($stmt->execute()) {
-    // Redirect to the task list page
-    header('Location: index.php');
-    exit(); // Ensure no further code is executed
-} else {
-    echo "Error: " . $stmt->error;
+    $stmt->bindParam("id", $id);
+    $stmt->execute();
+
+    //manual close of statement and connection to db
+    $stmt = null;
+    $pdo = null;
+
+    //send user back to index.php
+    header("Location: ../../index.php");
+    die();
+} catch (PDOException $e) {
+    die("Query failed: " . $e->getMessage());
 }
-
-$stmt->close();
-$conn->close();
