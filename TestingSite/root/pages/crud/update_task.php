@@ -1,10 +1,8 @@
 <?php
 
 if ($_SERVER["REQUEST_METHOD"] == "POST" && $_POST['updateTaskStatus'] === 'true') {
-    error_log("RUN MEEEEEEEEEE");
     updateRowStatus($_POST['id'], $_POST['status']);
     return;
-    error_log("THIS CODE SHOULD NOT BE RAN");
 } else if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $taskTitle = $_POST['taskTitle'];
     $tag = $_POST['tag'];
@@ -13,6 +11,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && $_POST['updateTaskStatus'] === 'true
     $startDate = $_POST['startDate'];
     $endDate = $_POST['endDate'];
     $id = $_GET['id'];
+
+    error_log("priority TEXT: " . $priority);
 
     try {
         require_once "../../scripts/dbh_inc.php";
