@@ -1,4 +1,6 @@
 <?php
+
+//comment here
 try {
     require_once "../root/scripts/dbh_inc.php";
 
